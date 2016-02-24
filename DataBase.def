@@ -149,6 +149,7 @@
 	<tax_nbucks> num(20,2) #交税额
 	<marks> char(60) #备注
 	
+	/*人员变动记录
 [PersonRecord]:
 	<zjq> num(6,0) #征集期
 	<scbh> char(11) #手册编号
@@ -159,6 +160,7 @@
 	<dwbm_bef> char(4) #变动前单位编码
 	<dwbm_aft> char(4) #变动后单位编码	
 	<user> char(20) #操作人
+	<change_reason> char(50) #变更原因
 	
 	
 	
