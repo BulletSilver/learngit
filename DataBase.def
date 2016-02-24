@@ -150,6 +150,15 @@
 	<marks> char(60) #备注
 	
 [PersonRecord]:
+	<zjq> num(6,0) #征集期
+	<scbh> char(11) #手册编号
+	<time_stamp> datetime #时间戳
+	<oper_type> char(2) #变动类型
+	<person_stat_bef> char(2) #变动前状态
+	<person_stat_aft> char(2) #变动后状态
+	<dwbm_bef> char(4) #变动前单位编码
+	<dwbm_aft> char(4) #变动后单位编码	
+	<user> char(20) #操作人
 	
 	
 	
