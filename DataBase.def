@@ -1,0 +1,162 @@
+	
+	/*个人基本信息
+[PersonInfo]:
+	$<person_id> char(18) #身份证号
+	@<scbh> char(11) #手册编号
+	<name> char(20) #姓名
+	<sex> char(2) 男|女 #性别
+	<folk> char(2) #民族
+	<person_stat> char(2) #人员状态
+	<birth_date> date #出生日期
+	<work_date> date #工作日期
+	<tire_date> date #退休日期
+	&<dwbm>  char(4) #单位编码
+	
+	<person_salary_yl> num(10,2) #养老个人基数
+	<person_salary_nj> num(10,2) # 年金个人基数
+	
+	<flag_yl> int 0|1 #养老参保标志 
+	<flag_sy> int 0|1 #失业参保标志 
+	<flag_gs> int 0|1 #工伤参保标志 
+	<flag_nj> int 0|1 #年金参保标志 
+	<flag_yb> int 0|1 #医保参保标志 
+	
+	$<aac001_yl> char(20) #省养老编号
+	$<aac001_gs> char(20) #省工伤编号
+	$<aac001_yb> char(20) #省医保编号
+	
+	/*单位基本信息
+[CorpInfo]:
+	@<dwbm> char(4) #单位编码
+	<dwmc> char(30) #单位名称
+	<dwxz> char(10) #单位性质
+	<zjqd> char(20) #征集渠道
+	<group> char(20) #征集单分组
+	<bh> char(10) #报表编号
+	
+	<flag_yl> int 0|1 #养老参保标志 
+	<flag_sy> int 0|1 #失业参保标志 
+	<flag_gs> int 0|1 #工伤参保标志 
+	<flag_nj> int 0|1 #年金参保标志 
+	<flag_yb> int 0|1 #医保参保标志
+	
+	<corp_salary_yl> num(20,2) #养老单位基数
+	<corp_salary_nj> num(20,2) #年金单位基数
+	
+	/*缴费比例
+[Ratio]:
+	&<dwbm> char(4) #单位编码
+	&<insur_type> char(2) #险种类型
+	<person_rate> num %0.0000 #个人缴费比例
+	<corp_rate> num %0.0000 #单位缴费比例
+	<corp2person_rate> num %0.0000 #单位划入个人比例
+	
+	/*险种信息
+[Insur]:
+	@<insur_type> char(2) #保险类型
+	<insur_name> char(20) #保险名称
+	
+	/*个人缴纳明细
+[PersonPay]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<scbh> char(11) #手册编号
+	<person_cost> num(10,2) #个人缴纳金额
+	<corp2person_cost> num(10,2) #单位划入个人金额
+	<person_tax> num(10,2) #个人交税
+	
+	/*单位缴纳明细
+[CorpPay]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<corp_cost> num(20,2) #单位缴纳金额
+	<corp_tax> num(10,2) #单位交税
+
+	/*本月累计欠缴
+[OverdueCollect]: 
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<corp_overdue> num(20,2) #单位欠缴金额
+	<person_overdue> num(10,2) #个人欠缴金额
+	<corp2person_overdue> num(10,2) #单位划入个人欠缴金额
+	<tax_overdue> num(20,2) #欠缴税额
+	<marks> char(60) #备注
+	
+	/*本月预征集
+[PreCollect]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<corp_costs> num(20,2) #单位缴纳金额
+	<person_costs> num(10,2) #个人缴纳金额
+	<corp2person_costs> num(10,2) #单位划入个人金额
+	<tax_pre> num(20,2) #预征税额
+	<marks> char(60) #备注
+	
+	/*本月实征集
+[ActCollect]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<corp_bucks> num(20,2) #单位缴纳到账金额
+	<person_bucks> num(10,2) #个人缴纳到账金额
+	<corp2person_bucks> num(10,2) #单位划入个人到账金额
+	<tax_act> num(20,2) #实征税额
+	<marks> char(60) #备注
+	
+	/*本月补征集
+[SuppleCollect]:
+	<zjq>  num(6,0) #征集期
+	<flag_bt> int -1|1 #补退标志
+	<insur_type> char(2) #险种类型
+	<scbh> char(11) #手册编号
+	<dwbm> char(4) #单位编码
+	<btdate_begin> num(6,0) #补退起始月份
+	<btdate_end> num(6,0) #补退结束月份
+	<corp_supple> num(20,2) #单位缴纳补征金额
+	<person_supple> num(10,2) #个人缴纳补征金额
+	<corp2person_supple> num(10,2) #单位划入个人补征金额
+	<tax_supple> num(20,2) #补征税额
+	<marks> char(60) #备注
+	
+	/*本月征集单
+[PreNotice]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<zjqd> char(20) #征集渠道
+	<group> char(20) #征集单分组
+	<bh> char(10) #报表编号
+	<corp_ncosts> num(20,2) #单位征集金额
+	<person_ncosts> num(10,2) #个人征集金额
+	<corp2person_ncosts> num(10,2) #单位划入个人征集金额
+	<tax_ncosts> num(20,2) #征税额
+	<marks> char(60) #备注
+
+	/*本月到账单
+[ActNotice]:
+	<zjq>  num(6,0) #征集期
+	<insur_type> char(2) #险种类型
+	<dwbm> char(4) #单位编码
+	<zjqd> char(20) #征集渠道
+	<group> char(20) #征集单分组
+	<bh> char(10) #报表编号
+	<corp_nbucks> num(20,2) #单位实征金额
+	<person_nbucks> num(10,2) #个人实征金额
+	<corp2person_nbucks> num(10,2) #单位划入个人实征金额
+	<tax_nbucks> num(20,2) #交税额
+	<marks> char(60) #备注
+	
+[PersonRecord]:
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
